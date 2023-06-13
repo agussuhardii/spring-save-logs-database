@@ -1,4 +1,4 @@
-use DBAppender to save logs to database
+use DBAppender save logs to database
 
 ### 1.  create database
 docker run -d --name psql \
