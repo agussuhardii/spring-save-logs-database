@@ -1,0 +1,39 @@
+<configuration>
+
+    <!--    load application.properties value-->
+    <property resource="application.properties"/>
+
+    <!--    format console log-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %green(%level) %yellow([%thread]) %cyan(%logger{10}) [%file : %line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    config database-->
+    <appender name="db" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource
+                class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>${spring.datasource.driver-class-name}</driverClass>
+            <url>${spring.datasource.url}</url>
+            <user>${spring.datasource.username}</user>
+            <password>${spring.datasource.password}</password>
+        </connectionSource>
+    </appender>
+
+    <!-- logs by project -->
+    <!--    <logger name="com.agussuhardi.logging">-->
+    <!--        <appender-ref ref="stdout" />-->
+    <!--        <appender-ref ref="db" />-->
+    <!--    </logger>-->
+
+    <!--    save log to database-->
+    <root level="ERROR">
+        <appender-ref ref="db"/>
+    </root>
+
+    <!--    show info log to console-->
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
